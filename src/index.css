@@ -1,0 +1,43 @@
+
+.fontAwesome {
+  font-family: 'Helvetica', FontAwesome, sans-serif;
+}
+
+.filters {
+  display: flex;
+  max-width: 230px;
+  justify-content: space-between;
+}
+
+.folder {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.folder:hover {
+  cursor: pointer
+}
+
+.button {
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: white;
+  border-color: white;
+  margin-left: 10px;
+  transition: all 0.4s ease 0s;
+}
+.button_active {
+  background-color:#85c800;
+  border-color:#85c800;
+}
+
+.input_search {
+  max-width: 120px;
+    border-radius: 20px;
+    padding: 3px;
+}
+
+.input_search::placeholder {
+  text-indent: 5px;
+}
