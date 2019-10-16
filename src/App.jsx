@@ -38,9 +38,9 @@ export default class App extends React.Component {
 
   buildTree = array => {
     const result = [],
-          map = {},
-          { AZ, ZA } = this.state.sort,
-          clonedArray = array.map(i => ({ ...i }));
+      map = {},
+      { AZ, ZA } = this.state.sort,
+      clonedArray = array.map(i => ({ ...i }));
     clonedArray.forEach(item => {
       if (map[item.id] && map[item.id].children) {
         item.children = map[item.id].children;
@@ -62,17 +62,23 @@ export default class App extends React.Component {
   };
 
   getTree = (folders, filter) => {
-    let tree = folders;
+    let tree = folders,
+      result = [];
     if (filter) {
       const filteredFolders = folders.filter(item =>
         item.title.toLowerCase().includes(filter.toLowerCase())
       );
-      const filteredFoldersParents = filteredFolders
-        .flatMap(elem =>
-          folders.filter(item => item.id === -1 || item.id === elem.parentId)
-        )
-        .concat(filteredFolders);
-      tree = [...new Set(filteredFoldersParents)];
+      for (let i = 0; i < filteredFolders.length; i++) {
+        result.push(filteredFolders[i]);
+        search(filteredFolders[i]);
+      }
+      function search(elem) {
+        if (elem.parentId === null) return;
+        let match = folders.find(item => item.id === elem.parentId);
+        result.push(match);
+        if (match) search(match);
+      }
+      tree = [...new Set(result)];
     }
     return this.buildTree(tree);
   };
